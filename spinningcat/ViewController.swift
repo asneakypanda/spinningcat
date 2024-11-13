@@ -51,9 +51,11 @@ class ViewController: UIViewController, MTKViewDelegate, ARSessionDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal // Detect horizontal surfaces
+        configuration.environmentTexturing = .automatic // For realistic lighting
 
         // Run the view's session
-        session.run(configuration)
+        session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
